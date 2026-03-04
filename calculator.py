@@ -9,3 +9,13 @@ class Calculator:
     def subtract(self, a, b):
         #difference
         return a - b
+
+    def multiply(self, a, b):
+        #multiplication
+        return a * b
+
+    def divide(self, a, b):
+        #division, with error handling (division by zero)
+        if b == 0:
+            raise ValueError("Division by zero is not allowed.")
+        return a / b
