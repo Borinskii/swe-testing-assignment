@@ -9,7 +9,7 @@ class TestAddition:
         self.calc = Calculator()
 
     def test_add_two_positive_numbers(self):
-        assert self.calc.add(5, 3) == 8
+        assert self.calc.add(5, 10) == 15
 
     def test_add_negative_numbers(self):
         # edge case: both operands negative
