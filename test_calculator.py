@@ -1,5 +1,7 @@
 import pytest
+import tkinter as tk
 from calculator import Calculator
+from main import QuickCalcApp
 
 
 class TestAddition:
@@ -74,3 +76,31 @@ class TestClear:
         self.calc.result = 99
         self.calc.clear()
         assert self.calc.result == 0
+
+
+class TestGUIIntegration:
+    def setup_method(self):
+        self.root = tk.Tk()
+        self.root.withdraw()
+        self.app = QuickCalcApp(self.root)
+
+    def teardown_method(self):
+        self.root.destroy()
+
+    def test_addition_via_gui_buttons(self):
+        # Simulate: press 5, +, 3, = and assert display shows 8
+        self.app._on_button("5")
+        self.app._on_button("+")
+        self.app._on_button("3")
+        self.app._on_button("=")
+        assert self.app.display_var.get() == "8"
+
+    def test_clear_resets_display_to_zero(self):
+        # Simulate: press 6, *, 7, =, then C and assert display shows 0
+        self.app._on_button("6")
+        self.app._on_button("*")
+        self.app._on_button("7")
+        self.app._on_button("=")
+        assert self.app.display_var.get() == "42"
+        self.app._on_button("C")
+        assert self.app.display_var.get() == "0"
