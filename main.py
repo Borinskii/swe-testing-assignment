@@ -26,25 +26,25 @@ class QuickCalcApp:
 
         # (label, row, col, colspan, color)
         buttons = [
-            ("C", 1, 0, 1, "#e74c3c"),
-            ("",  1, 1, 1, None),
-            ("",  1, 2, 1, None),
-            ("/", 1, 3, 1, "#f0a500"),
-            ("7", 2, 0, 1, "white"),
-            ("8", 2, 1, 1, "white"),
-            ("9", 2, 2, 1, "white"),
-            ("*", 2, 3, 1, "#f0a500"),
-            ("4", 3, 0, 1, "white"),
-            ("5", 3, 1, 1, "white"),
-            ("6", 3, 2, 1, "white"),
-            ("-", 3, 3, 1, "#f0a500"),
-            ("1", 4, 0, 1, "white"),
-            ("2", 4, 1, 1, "white"),
-            ("3", 4, 2, 1, "white"),
-            ("+", 4, 3, 1, "#f0a500"),
-            ("0", 5, 0, 2, "white"),
-            (".", 5, 2, 1, "white"),
-            ("=", 5, 3, 1, "#27ae60"),
+            ("C",   1, 0, 1, "#e74c3c"),
+            ("+/-", 1, 1, 1, "white"),
+            ("",    1, 2, 1, None),
+            ("/",   1, 3, 1, "#f0a500"),
+            ("7",   2, 0, 1, "white"),
+            ("8",   2, 1, 1, "white"),
+            ("9",   2, 2, 1, "white"),
+            ("*",   2, 3, 1, "#f0a500"),
+            ("4",   3, 0, 1, "white"),
+            ("5",   3, 1, 1, "white"),
+            ("6",   3, 2, 1, "white"),
+            ("-",   3, 3, 1, "#f0a500"),
+            ("1",   4, 0, 1, "white"),
+            ("2",   4, 1, 1, "white"),
+            ("3",   4, 2, 1, "white"),
+            ("+",   4, 3, 1, "#f0a500"),
+            ("0",   5, 0, 2, "white"),
+            (".",   5, 2, 1, "white"),
+            ("=",   5, 3, 1, "#27ae60"),
         ]
 
         for (text, row, col, colspan, color) in buttons:
@@ -70,6 +70,8 @@ class QuickCalcApp:
             self._do_clear()
         elif text == "=":
             self._do_equals()
+        elif text == "+/-":
+            self._do_negate()
         elif text in ("+", "-", "*", "/"):
             self._do_operator(text)
         else:
@@ -88,6 +90,11 @@ class QuickCalcApp:
         self.first_operand = float(self.display_var.get())
         self.operator = op
         self.reset_next = True
+
+    def _do_negate(self):
+        current = float(self.display_var.get())
+        result = self.calc.negate(current)
+        self.display_var.set(int(result) if result == int(result) else result)
 
     def _do_equals(self):
         if self.operator is None or self.first_operand is None:

@@ -3,22 +3,27 @@ class Calculator:
         self.result = 0
 
     def add(self, a, b):
-        #sum
+        # sum
         return a + b
 
     def subtract(self, a, b):
-        #difference
+        # difference
         return a - b
 
     def multiply(self, a, b):
-        #multiplication
+        # multiplication
         return a * b
 
     def divide(self, a, b):
-        #division, with error handling (division by zero)
+        # division, with error handling (division by zero)
         if b == 0:
             raise ValueError("Division by zero is not allowed.")
         return a / b
+
+    def negate(self, a):
+        # change sign of a number
+        return a * -1
+
     def clear(self):
-        #clear the result
+        # clear the result
         self.result = 0
